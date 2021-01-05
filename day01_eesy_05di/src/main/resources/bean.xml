@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 依赖注入 Dependency Injection
+        当前类需要用到的其他对象都由spring为我们提供，我们只需要在配置文件中说明。依赖关系的维护就称为依赖注入。
+        依赖注入的三种类型：
+            基本类型和String
+            其他bean（配置文件中或注解配置过的bean）
+            复杂类型（集合类型）
+        注入的三种方式：
+            构造方法提供
+            set方法提供
+            注解提供
+    -->
+
+
+    <!-- 构造器注入
+        标签：constructor-arg
+        属性：
+            type：指定注入参数的数据类型
+            index：指定注入参数在构造器中的索引位置（从0开始）
+            name：指定注入参数的名字
+            ===== 以上三个属性用于指定给构造器中的哪个参数赋值 =====
+            value：用于提供基本数据类型和String类型
+            ref：用于指定其他的bean
+     -->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+        <constructor-arg name="name" value="fly"/>
+        <constructor-arg name="age" value="22"/>
+        <constructor-arg name="birthday" ref="now"/>
+    </bean>
+
+    <bean id="now" class="java.util.Date"/>
+
+
+    <!-- set方法注入        更常用
+        标签：property
+        属性：
+            name：指定注入参数的名字
+            value：用于提供基本数据类型和String类型
+            ref：用于指定其他的bean
+     -->
+    <bean id="accountService2" class="com.itheima.service.impl.AccountServiceImpl2">
+        <property name="name" value="test"/>
+        <property name="age" value="99"/>
+        <property name="birthday" ref="now"/>
+    </bean>
+
+
+    <!-- 复杂类型（集合类型）
+        用于给List结构注入的标签：list、set、array
+        用于给Map结构注入的标签：map、prop
+        结构相同的标签可以呼唤
+     -->
+    <bean id="accountService3" class="com.itheima.service.impl.AccountServiceImpl3">
+        <property name="myArray">
+            <list>
+                <value>AAA</value>
+                <value>BBB</value>
+                <value>CCC</value>
+            </list>
+        </property>
+        <property name="myList">
+            <set>
+                <value>OOO</value>
+                <value>PPP</value>
+                <value>QQQ</value>
+            </set>
+        </property>
+        <property name="mySet">
+            <array>
+                <value>XXX</value>
+                <value>YYY</value>
+                <value>YYY</value>
+            </array>
+        </property>
+        <property name="myMap">
+            <props>
+                <prop key="m">mmm</prop>
+                <prop key="n">nnn</prop>
+            </props>
+        </property>
+        <property name="myProperties">
+            <map>
+                <entry key="a" value="aaa"/>
+                <entry key="b" value="bbb"/>
+            </map>
+        </property>
+    </bean>
+</beans>
