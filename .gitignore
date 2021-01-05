@@ -2,3 +2,6 @@
 /day01_eesy_01jdbc/target/
 /day01_eesy_02factory/target/
 /day01_eesy_03spring/target/
+
+/.idea
+*.iml

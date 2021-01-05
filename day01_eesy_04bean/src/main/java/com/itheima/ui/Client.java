@@ -1,7 +1,6 @@
 package com.itheima.ui;
 
 import com.itheima.service.IAccountService;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -19,9 +18,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Client {
     public static void main(String[] args) {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
+        ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
         IAccountService as = ac.getBean("accountService", IAccountService.class);
-//        as.saveAccount();
 
+        // 手动关闭容器
+        ac.close();
     }
 }

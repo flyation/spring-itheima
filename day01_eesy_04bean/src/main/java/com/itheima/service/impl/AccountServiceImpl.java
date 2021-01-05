@@ -9,7 +9,13 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
-    public void saveAccount() {
-        System.out.println("saveAccount...");
+    public void saveAccount() {}
+
+    public void init() {
+        System.out.println("init...");
+    }
+
+    public void destroy() {
+        System.out.println("destroy...");
     }
 }
