@@ -5,7 +5,6 @@ import com.itheima.service.IAccountService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ public class AccountServiceTest {
 
     @Test
     public void listAllAcount() {
-//        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
         ApplicationContext ac = new AnnotationConfigApplicationContext("com.itheima");
         IAccountService as = ac.getBean("accountService", IAccountService.class);
         List<Account> accounts = as.listAllAcount();
@@ -25,7 +23,7 @@ public class AccountServiceTest {
 
     @Test
     public void findAcountById() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
+        ApplicationContext ac = new AnnotationConfigApplicationContext("com.itheima");
         IAccountService as = ac.getBean("accountService", IAccountService.class);
         Account acount = as.findAcountById(2);
         System.out.println(acount);
@@ -33,7 +31,7 @@ public class AccountServiceTest {
 
     @Test
     public void saveAccount() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
+        ApplicationContext ac = new AnnotationConfigApplicationContext("com.itheima");
         IAccountService as = ac.getBean("accountService", IAccountService.class);
         Account account = new Account();
         account.setName("alex");
@@ -43,7 +41,7 @@ public class AccountServiceTest {
 
     @Test
     public void updateAccount() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
+        ApplicationContext ac = new AnnotationConfigApplicationContext("com.itheima");
         IAccountService as = ac.getBean("accountService", IAccountService.class);
         Account account = new Account();
         account.setId(2);
@@ -54,7 +52,7 @@ public class AccountServiceTest {
 
     @Test
     public void deleteAccount() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
+        ApplicationContext ac = new AnnotationConfigApplicationContext("com.itheima");
         IAccountService as = ac.getBean("accountService", IAccountService.class);
         as.deleteAccount(4);
     }
