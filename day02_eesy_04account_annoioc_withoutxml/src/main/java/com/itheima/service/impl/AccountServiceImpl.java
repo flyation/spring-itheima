@@ -18,13 +18,13 @@ public class AccountServiceImpl implements IAccountService {
     private IAccountDao accountDao;
 
     @Override
-    public List<Account> listAllAcount() {
-        return accountDao.listAllAcount();
+    public List<Account> listAllAccount() {
+        return accountDao.listAllAccount();
     }
 
     @Override
-    public Account findAcountById(Integer id) {
-        return accountDao.findAcountById(id);
+    public Account findAccountById(Integer id) {
+        return accountDao.findAccountById(id);
     }
 
     @Override

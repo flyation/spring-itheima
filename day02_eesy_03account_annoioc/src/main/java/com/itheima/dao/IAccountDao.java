@@ -10,14 +10,13 @@ import java.util.List;
 public interface IAccountDao {
     /**
      * 查询所有
-     * @return
      */
-    List<Account> listAllAcount();
+    List<Account> listAllAccount();
 
     /**
      * 查询一个
      */
-    Account findAcountById(Integer id);
+    Account findAccountById(Integer id);
 
     /**
      * 保存

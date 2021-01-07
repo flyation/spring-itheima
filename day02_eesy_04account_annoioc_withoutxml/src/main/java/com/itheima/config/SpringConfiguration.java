@@ -1,14 +1,9 @@
 package com.itheima.config;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
-import org.apache.commons.dbutils.QueryRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-
-import javax.sql.DataSource;
-import java.beans.PropertyVetoException;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * Spring配置类，作用和xml一样
@@ -19,28 +14,11 @@ import java.beans.PropertyVetoException;
  * Bean：把当前方法的返回值作为bean对象存入IOC容器中
  *      name：用于指定bean的id，当不指定时，id默认为方法名。
  *      细节：当使用该注解配置方法时，若方法有参数，Spring框架会从IOC容器中寻找是否有可用的对象。查找方式和@Autowired相同
+ * import：用于导入其他配置类，import的类就是Configuration类的子配置类
  */
 @Configuration
 @ComponentScan(basePackages = "com.itheima")
+@Import(JdbcConfiguration.class)
+@PropertySource("classpath:jdbcConfig.properties")
 public class SpringConfiguration {
-
-    @Bean(name = "runner")
-    @Scope("prototype")
-    QueryRunner CreateQueryRunner(DataSource dataSource) {
-        return new QueryRunner(dataSource);
-    }
-
-    @Bean
-    DataSource dataSource() {
-        ComboPooledDataSource ds = new ComboPooledDataSource();
-        try {
-            ds.setDriverClass("com.mysql.cj.jdbc.Driver");
-        } catch (PropertyVetoException e) {
-            throw new RuntimeException(e);
-        }
-        ds.setJdbcUrl("jdbc:mysql://121.199.7.212:3306/eesy");
-        ds.setUser("root");
-        ds.setPassword("123456");
-        return ds;
-    }
 }

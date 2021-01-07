@@ -14,19 +14,19 @@ import java.util.List;
 public class AccountServiceTest {
 
     @Test
-    public void listAllAcount() {
+    public void listAllAccount() {
         ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
         IAccountService as = ac.getBean("accountService", IAccountService.class);
-        List<Account> accounts = as.listAllAcount();
+        List<Account> accounts = as.listAllAccount();
         accounts.forEach(System.out::println);
     }
 
     @Test
-    public void findAcountById() {
+    public void findAccountById() {
         ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
         IAccountService as = ac.getBean("accountService", IAccountService.class);
-        Account acount = as.findAcountById(2);
-        System.out.println(acount);
+        Account Account = as.findAccountById(2);
+        System.out.println(Account);
     }
 
     @Test

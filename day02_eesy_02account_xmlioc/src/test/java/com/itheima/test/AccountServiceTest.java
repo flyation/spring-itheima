@@ -3,36 +3,37 @@ package com.itheima.test;
 import com.itheima.domain.Account;
 import com.itheima.service.IAccountService;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
 /**
  * 使用Junit单元测试
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:bean.xml")
 public class AccountServiceTest {
 
+    @Autowired
+    private IAccountService as;
+
     @Test
-    public void listAllAcount() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
-        IAccountService as = ac.getBean("accountService", IAccountService.class);
-        List<Account> accounts = as.listAllAcount();
+    public void listAllAccount() {
+        List<Account> accounts = as.listAllAccount();
         accounts.forEach(System.out::println);
     }
 
     @Test
-    public void findAcountById() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
-        IAccountService as = ac.getBean("accountService", IAccountService.class);
-        Account acount = as.findAcountById(2);
-        System.out.println(acount);
+    public void findAccountById() {
+        Account Account = as.findAccountById(2);
+        System.out.println(Account);
     }
 
     @Test
     public void saveAccount() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
-        IAccountService as = ac.getBean("accountService", IAccountService.class);
         Account account = new Account();
         account.setName("alex");
         account.setMoney(199.9F);
@@ -41,8 +42,6 @@ public class AccountServiceTest {
 
     @Test
     public void updateAccount() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
-        IAccountService as = ac.getBean("accountService", IAccountService.class);
         Account account = new Account();
         account.setId(2);
         account.setName("dog");
@@ -52,8 +51,6 @@ public class AccountServiceTest {
 
     @Test
     public void deleteAccount() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
-        IAccountService as = ac.getBean("accountService", IAccountService.class);
-        as.deleteAccount(4);
+        as.deleteAccount(15);
     }
 }

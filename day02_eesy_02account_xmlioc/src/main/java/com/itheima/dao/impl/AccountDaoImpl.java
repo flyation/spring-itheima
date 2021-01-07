@@ -21,20 +21,20 @@ public class AccountDaoImpl implements IAccountDao {
     }
 
     @Override
-    public List<Account> listAllAcount() {
+    public List<Account> listAllAccount() {
         try {
             return runner.query("select * from account",
-                    new BeanListHandler<Account>(Account.class));
+                    new BeanListHandler<>(Account.class));
         } catch (SQLException e) {
             throw new  RuntimeException(e);
         }
     }
 
     @Override
-    public Account findAcountById(Integer id) {
+    public Account findAccountById(Integer id) {
         try {
             return runner.query("select * from account where id = ?",
-                    new BeanHandler<Account>(Account.class), id);
+                    new BeanHandler<>(Account.class), id);
         } catch (SQLException e) {
             throw new  RuntimeException(e);
         }
