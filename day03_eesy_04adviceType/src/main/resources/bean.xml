@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- IoC配置 -->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"/>
+
+    <bean id="logger" class="com.itheima.utils.Logger"/>
+
+
+    <!-- AOP配置 -->
+    <aop:config>
+        <!-- 配置切入点表达式
+            此标签写在aop:aspect标签内时，只能被当前切面使用
+            它还可以写在aop:aspect标签外面，此时所有切面可用（此时必须将它定义在aop:aspect标签之前）
+        -->
+        <aop:pointcut id="pt1" expression="execution(* com.itheima.service.impl.*.*(..))"/>
+
+        <!-- 配置切面 -->
+        <aop:aspect id="logAdvice" ref="logger">
+            <!-- 前置通知：在切入点方法执行前 -->
+<!--            <aop:before method="beforePrintLog" pointcut-ref="pt1"/>-->
+            <!-- 后置通知：在切入点方法正常执行后。它和异常通知永远只能执行一个 -->
+<!--            <aop:after-returning method="afterReturningPrintLog" pointcut-ref="pt1"/>-->
+            <!-- 异常通知：在切入点方法执行产生异常后。它和后置通知永远只能执行一个 -->
+<!--            <aop:after-throwing method="afterThrowingPrintLog" pointcut-ref="pt1"/>-->
+            <!-- 最终通知：无论切入点方法是否正常执行，它都会在最后执行 -->
+<!--            <aop:after method="afterPrintLog" pointcut-ref="pt1"/>-->
+
+            <!-- 环绕通知 -->
+            <aop:around method="aroundPrintLog" pointcut-ref="pt1"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

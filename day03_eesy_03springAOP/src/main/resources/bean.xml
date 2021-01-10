@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- IoC配置 -->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"/>
+
+    <bean id="logger" class="com.itheima.utils.Logger"/>
+
+
+    <!-- Spring中基于XML的AOP配置步骤
+            1.把通知的Bean也交给Spring管理
+            2.使用aop:config标签表明开始AOP的配置
+            3.使用aop:aspect标签表明配置切面
+                    id属性：给切面提供一个唯一标识
+                    ref属性：指定通知类
+            4.在aop:aspect标签内部使用对应标签来配置通知的类型
+                    method属性：通知方法
+                    pointcut属性：切入点表达式
+                            关键字：execution(表达式)
+                            表达式：访问修饰符 返回值类型 包名.类名.方法名(参数列表)
+                                全通配写法：* *..*.*(..)
+                                实际开发中切入点表达式的通常写法：切到业务层实现类下的所有方法。例：* com.itheima.service.impl.*.*(..)
+     -->
+    <aop:config>
+        <aop:aspect id="logAdvice" ref="logger">
+            <!-- 前置通知 -->
+<!--            <aop:before method="printLog" pointcut="execution(public * com.itheima.service.impl.AccountServiceImpl.saveAccount())"/>-->
+            <!-- 访问修饰符可省略 -->
+<!--            <aop:before method="printLog" pointcut="execution(void com.itheima.service.impl.AccountServiceImpl.saveAccount())"/>-->
+            <!-- 返回值可通配（*） -->
+<!--            <aop:before method="printLog" pointcut="execution(* com.itheima.service.impl.AccountServiceImpl.saveAccount())"/>-->
+            <!-- 包名可通配（每级一个*） -->
+<!--            <aop:before method="printLog" pointcut="execution(* *.*.*.*.AccountServiceImpl.saveAccount())"/>-->
+            <!-- 包名可全通配（*..） -->
+<!--            <aop:before method="printLog" pointcut="execution(* *..AccountServiceImpl.saveAccount())"/>-->
+            <!-- 类名可通配（*） -->
+<!--            <aop:before method="printLog" pointcut="execution(* *..*.saveAccount())"/>-->
+            <!-- 方法名可通配（*） -->
+<!--            <aop:before method="printLog" pointcut="execution(* *..*.*())"/>-->
+            <!-- 参数列表有参数的通配（统配任意类型，但必须有参数）（*） -->
+<!--            <aop:before method="printLog" pointcut="execution(* *..*.*(*))"/>-->
+            <!-- 参数列表全通配（有无参数均可）（..） -->
+            <aop:before method="printLog" pointcut="execution(* *..*.*(..))"/>
+
+<!--            <aop:before method="printLog" pointcut="execution(* *..*.*(..))"></aop:before>-->
+        </aop:aspect>
+    </aop:config>
+</beans>

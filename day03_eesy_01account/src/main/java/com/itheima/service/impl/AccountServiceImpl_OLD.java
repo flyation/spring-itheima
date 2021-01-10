@@ -56,7 +56,7 @@ public class AccountServiceImpl_OLD implements IAccountService {
         targetAccount.setMoney(targetAccount.getMoney() + money);
         // 数据库更新
         accountDao.updateAccount(sourceAccount);
-//        int i = 1 / 0;
+        int i = 1 / 0;
         accountDao.updateAccount(targetAccount);
     }
 }
