@@ -45,7 +45,7 @@
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://121.199.7.212:3306/eesy"/>
         <property name="user" value="root"/>
-        <property name="password" value="123456"/>
+        <property name="password" value="***"/>
     </bean>
 
     <!-- 配置AccountServiceImpl -->

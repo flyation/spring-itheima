@@ -11,22 +11,25 @@
         https://www.springframework.org/schema/aop/spring-aop.xsd
 ">
 
-    <!-- 开启IoC注解扫描 -->
-    <context:component-scan base-package="com.itheima"/>
-
-    <!-- 开启AOP注解 -->
-    <aop:aspectj-autoproxy/>
-
-    <!-- 配置DataSource -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <!-- 注入数据源信息 -->
-        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://121.199.7.212:3306/eesy"/>
-        <property name="user" value="root"/>
-        <property name="password" value="***"/>
+    <!-- 配置账户业务层层 -->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+        <!-- 注入数据源 -->
+        <property name="accountDao" ref="accountDao"/>
     </bean>
 
-    <!-- 配置QueryRunner -->
-    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype"/>
+    <!-- 配置账户持久层 -->
+    <bean id="accountDao" class="com.itheima.dao.impl.AccountDaoImpl">
+        <!-- 注入数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 配置DataSource -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!-- 注入数据源信息 -->
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://121.199.7.212:3306/eesy"/>
+        <property name="username" value="root"/>
+        <property name="password" value="***"/>
+    </bean>
 
 </beans>
