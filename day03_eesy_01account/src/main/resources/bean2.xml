@@ -17,7 +17,7 @@
     <aop:aspectj-autoproxy/>
 
     <!-- 配置AccountServiceImpl_OLD -->
-    <bean id="accountServiceImpl_old" class="com.itheima.service.impl.AccountServiceImpl_OLD">
+    <bean id="accountServiceImpl_old" class="com.itheima.service.impl.AccountServiceImpl">
         <!-- 注入dao -->
         <property name="accountDao" ref="accountDao"/>
     </bean>
